@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <a href='/logout'>Logout</a>         
+    <p>Welcome, {{user_logged.name}}</p>   
+
+    <table>
+        <thead>
+            <tr>
+                <th>Alias</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for User in user_logged.friends.all %}
+            <tr>
+                <td>{{User.alias}}</td>
+                <td><a href='/main/show/{{User.id}}'>View Profile</a> | <a href='/main/remove/{{User.id}}'>Remove as Friend</a></td>                  
+            </tr>
+            {% endfor%}
+        </tbody>
+    </table>
+    
+
+    <table>
+        <thead>
+            <tr>
+                <th>Alias</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for User in user_all %}
+            {% if User not in user_logged.friends.all %}
+            <tr>
+                <td>{{User.alias}}</td>
+                <td><a href='/main/add/{{User.id}}'><button>Add as Friend</button></a></td>                  
+            </tr>
+            {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+            
+</body>
+</html>
